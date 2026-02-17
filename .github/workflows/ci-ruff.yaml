@@ -1,4 +1,4 @@
-name: Ruff CI Workflow
+name: "[CI] Ruff"
 
 on:
   pull_request:
@@ -21,9 +21,10 @@ jobs:
           python -m pip install --upgrade pip
           pip install poetry
           poetry install
-
-      - name: Format check      
-        run: "poetry run ruff format --check"
-        
-      - name: Check code
-        run: "poetry run ruff check ."
+  ruff:
+    - depends-on: build
+    - name: Format check      
+      run: "poetry run ruff format --check"
+      
+    - name: Check code
+      run: "poetry run ruff check ."
